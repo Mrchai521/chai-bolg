@@ -1,0 +1,202 @@
+@charset "utf-8";
+/*幻灯片/轮播图全局布局样式*/
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+.swiper-container img{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+.swiper-slide {
+    background-size: cover;
+
+}
+
+.swiper-pagination-bullet {
+    display: none;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color:#fff;
+    opacity: 1;
+    background: rgba(0,0,0,0.8);
+    cursor: pointer;
+    transition: width 0.3s ease-in-out;
+    -webkit-animation-name: fadeInUp; /*动画名称*/
+    -webkit-animation-duration: 1s; /*动画持续时间*/
+    -webkit-animation-iteration-count: 1; /*动画次数*/
+    -webkit-animation-delay: 0s; /*延迟时间*/
+
+}
+
+.swiper-pagination-bullet-active {
+    background: #ff4e4e;
+}
+
+.swiper-container-horizontal>.swiper-pagination-progress {
+    height: 3px;
+}
+
+.swiper-pagination-progress .swiper-pagination-progressbar {
+    background-image: linear-gradient(-225deg, #ff4e4e 0%, #ec2f2f 100%);
+}
+
+.swiper-button-next, .swiper-button-prev {
+    opacity: 0.8;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    z-index: 10;
+    cursor: pointer;
+    font-size: 24px;
+    border: 0;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    background-image:none;
+}
+
+
+.swiper-button-next.swiper-button-disabled,.swiper-button-prev.swiper-button-disabled {
+    opacity: .35;
+    cursor: auto;
+    pointer-events: none;
+
+}
+
+.swiper-button-prev,.swiper-container-rtl .swiper-button-next {
+    left: 30px;
+    display: none;
+    -webkit-animation-name: fadeInLeft; /*动画名称*/
+    -webkit-animation-duration: 1s; /*动画持续时间*/
+    -webkit-animation-iteration-count: 1; /*动画次数*/
+    -webkit-animation-delay: 0s; /*延迟时间*/
+
+}
+
+.swiper-button-next,.swiper-container-rtl .swiper-button-prev {
+    right: 30px;
+    display: none;
+    -webkit-animation-name: fadeInRight; /*动画名称*/
+    -webkit-animation-duration: 1s; /*动画持续时间*/
+    -webkit-animation-iteration-count: 1; /*动画次数*/
+    -webkit-animation-delay: 0s; /*延迟时间*/
+}
+
+.swipers-slider:hover .swiper-button-next,.swipers-slider:hover .swiper-button-prev,.swipers-slider:hover .swiper-pagination-bullet{
+    display: block;
+    display: inline-block;
+}
+/*.swipers-slider:hover .swiper-pagination-bullet{*/
+    /*display: block;*/
+    /*display: inline-block;*/
+/*}*/
+.swiper-button-prev:hover,.swiper-button-next:hover{
+
+    background: rgba(0,0,0,0.5);
+    opacity: 0.9;
+    transition: .2s;
+    -webkit-transition: .2s;
+    color: #ff4e4e;
+
+
+}
+
+.swiper-slide img {
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: 5px solid white;
+}
+
+/* Tablet (Portrait)
+================================================== */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+    .swiper-container {
+        box-shadow: 0 0 10px rgba(208,208,208,.05);
+    }
+    .banner {
+        margin:0;
+    }
+    .swiper-container img{
+        width: 100%;
+        height: 80px;
+        object-fit: cover;
+    }
+    .swiper-slide {margin-bottom:10px;}
+    .banner .banner-item .index-banner-box {
+        height: 70px;
+    }
+
+
+}
+/* Mobile (Portrait & Landscape)
+================================================== */
+@media only screen and (max-width: 767px) {
+    .swiper-container {
+        box-shadow: 0 0 10px rgba(208,208,208,.05);
+    }
+    .banner {
+        margin:0;
+    }
+    .swiper-container img{
+        height: 80px;
+        object-fit: cover;}
+    .swiper-slide {margin-bottom:10px;}
+    .banner .banner-item .index-banner-box {
+        height: 70px;
+    }
+}
+/* Mobile (Landscape)
+================================================== */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .swiper-container {
+        box-shadow: 0 0 10px rgba(208,208,208,.05);
+    }
+    .banner {
+        margin:0;
+    }
+    .swiper-container img{
+        width: 100%;
+        height: 80px;
+        object-fit: cover;
+    }
+    .swiper-slide {margin-bottom:10px;}
+    .recommend {width:100%;}
+    .banner .banner-item .index-banner-box {
+        height: 70px;
+    }
+}
+/* Mobile (Portrait only)
+================================================== */
+@media only screen and (max-width: 479px) {
+    .banner {
+        margin:0;
+    }
+    .swiper-container img{
+        width: 100%;
+        height: 80px;
+        object-fit: cover;
+    }
+    .swiper-slide {margin-bottom:10px;}
+    .banner .banner-item .index-banner-box {
+        height: 70px;
+    }
+}

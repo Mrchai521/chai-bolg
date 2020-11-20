@@ -1,0 +1,10 @@
+{
+    "name": "youth",
+    "slogan": "青春主题",
+    "version": "V3",
+    "author": "CUI",
+    "website": "www.zjsg.me",
+    "previews": [
+        "/theme/youth/dist/images/preview/1.png"
+    ]
+}
