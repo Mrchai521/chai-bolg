@@ -5,7 +5,8 @@
         <h1>字典数据</h1>
         <ol class="breadcrumb">
             <li><a href="${base}/admin">首页</a></li>
-            <li class="active">字典数据</li>
+            <li><a href="${base}/admin/dict/list">字典管理</a></li>
+            <li class="active">字典数据项</li>
         </ol>
     </section>
     <section class="content container-fluid">
@@ -13,16 +14,13 @@
             <div class="col-md-12 search-collapse">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">字典数据</h3>
-                        <#--<div class="box-tools">
-                            <a class="btn btn-default btn-sm" href="javascrit:;" data-action="batch_del">批量删除</a>
-                        </div>-->
+                        <h3 class="box-title">字典数据项</h3>
                     </div>
                     <div class="btn-group-sm" id="toolbar" role="group">
-                        <a class="btn btn-success" href="${base}/admin/dict/addView" >
+                        <a class="btn btn-success" href="${base}/admin/dictdata/addView?id=${id}">
                             <i class="fa fa-plus"></i> 新增
                         </a>
-                        <a class="btn btn-primary single disabled" onclick="edit()" >
+                        <a class="btn btn-primary single disabled" onclick="edit()">
                             <i class="fa fa-edit"></i> 修改
                         </a>
                         <a class="btn btn-danger multiple " data-action="batch_del">
@@ -37,14 +35,13 @@
                     </div>
                     <div class="box-body">
                         <form id="qForm" class="form-inline">
-<#--                            <input type="hidden" name="pageNo" value="${page.number + 1}"/>-->
+                            <#--                            <input type="hidden" name="pageNo" value="${page.number + 1}"/>-->
                         </form>
                         <div class="table-responsive">
                             <table id="dataGrid" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th width="50"><input type="checkbox" class="checkall"></th>
-                                    <th>编号</th>
                                     <th>字典编码</th>
                                     <th>字典标签</th>
                                     <th>字典键值</th>
@@ -59,23 +56,22 @@
                                 <#list view as row>
                                     <tr>
                                         <td>
-                                                <input type="checkbox" name="id" value="${row.id}">
+                                            <input type="checkbox" name="id" value="${row.id}">
                                         </td>
                                         <td>${row.id}</td>
-                                        <td>${row.dictCode}</td>
                                         <td>${row.dictLabel}</td>
                                         <td>${row.dictValue}</td>
                                         <td>${row.dictSort}</td>
                                         <td>
                                             <#if row.createTime??>
-                                                ${row.createTime?string('yyyy-MM-dd')}
+                                                ${row.createTime?string("yyyy-MM-dd HH:mm:ss")}
                                             <#else >
                                                 /
                                             </#if>
                                         </td>
                                         <td>
                                             <#if row.createTime??>
-                                                ${row.createTime?string('yyyy-MM-dd')}
+                                                ${row.createTime?string("yyyy-MM-dd HH:mm:ss")}
                                             <#else >
                                                 /
                                             </#if>
@@ -89,10 +85,8 @@
                                             </#if>
                                         </td>
                                         <td>
-                                            <a href="${base}/admin/dict/view?id=${row.id}"
+                                            <a href="${base}/admin/dictdata/updateView?id=${row.id}&dictId=${id}"
                                                class="btn btn-success btn-xs"><i class="fa fa-edit"></i>编辑</a>
-                                            <a href="${base}/admin//view?id=${row.id}"
-                                               class="btn btn-info btn-xs"><i class="fa fa-list-ul"></i>列表</a>
                                             <a href="javascript:void(0);" class="btn btn-xs btn-danger"
                                                data-id="${row.id}"
                                                data-action="delete"><i class="fa fa-remove"></i>删除
@@ -105,7 +99,7 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <@pager "list" page 5 />
+                        <#--<@pager "list" page 5 />-->
                     </div>
                 </div>
             </div>
@@ -119,14 +113,15 @@
                 if (json.message != null && json.message != '') {
                     layer.msg(json.message, {icon: 1});
                 }
-                $('#qForm').submit();
+                //$('#qForm').submit();
+                location.reload();
             } else {
                 layer.msg(json.message, {icon: 2});
             }
         }
 
         function doDelete(ids) {
-            J.getJSON('${base}/admin/dict/delete', J.param({'id': ids}, true), ajaxReload);
+            J.getJSON('${base}/admin/dictdata/delete', J.param({'id': ids, 'dictId': ${id}}, true), ajaxReload);
         }
 
         $(function () {
@@ -139,6 +134,7 @@
                 }, function () {
                     doDelete(that.attr('data-id'));
                 }, function () {
+
                 });
                 return false;
             });

@@ -13,5 +13,5 @@ import java.io.Serializable;
  */
 @Data
 public class DictDataVO extends DictData implements Serializable {
-    private DictTypeVO dictTypeVO;
+    private Long dictId;
 }
