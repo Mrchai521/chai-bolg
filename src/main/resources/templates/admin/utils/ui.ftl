@@ -53,7 +53,8 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <li><a href="${base}/lockscreen" title="锁定屏幕" id="lockScreen"><i class="fa fa-lock"></i></a></li>
+                        <li><a href="${base}/lockScreen" title="锁定屏幕" id="lockScreen"><i class="fa
+                        fa-lock"></i></a></li>
                         <li><a href="/" title="跳转到前台" target="_blank"><i class="fa fa-television"></i></a></li>
                         <li class="messages-menu">
                             <a href="${base}/users/${profile.id}/messages">

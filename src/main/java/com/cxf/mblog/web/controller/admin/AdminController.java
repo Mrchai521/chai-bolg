@@ -9,10 +9,14 @@
 */
 package com.cxf.mblog.web.controller.admin;
 
+import com.cxf.mblog.modules.data.AccountProfile;
+import com.cxf.mblog.modules.entity.User;
 import com.cxf.mblog.modules.service.ChannelService;
 import com.cxf.mblog.modules.service.CommentService;
 import com.cxf.mblog.modules.service.PostService;
 import com.cxf.mblog.modules.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author langhsu
- *
  */
 @Controller
 public class AdminController {
@@ -36,21 +39,21 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-	@RequestMapping("/admin")
-	public String index(HttpServletRequest request, ModelMap model) {
-		pushSystemStatus(request, model);
-		model.put("channelCount", channelService.count());
+    @RequestMapping("/admin")
+    public String index(HttpServletRequest request, ModelMap model) {
+        pushSystemStatus(request, model);
+        model.put("channelCount", channelService.count());
         model.put("postCount", postService.count());
         model.put("commentCount", commentService.count());
         model.put("userCount", userService.count());
-		return "/admin/index";
-	}
-	
-	private void pushSystemStatus(HttpServletRequest request, ModelMap model) {
+        return "/admin/index";
+    }
+
+    private void pushSystemStatus(HttpServletRequest request, ModelMap model) {
         float freeMemory = (float) Runtime.getRuntime().freeMemory();
         float totalMemory = (float) Runtime.getRuntime().totalMemory();
         float usedMemory = (totalMemory - freeMemory);
-        float memPercent = Math.round(freeMemory / totalMemory * 100) ;
+        float memPercent = Math.round(freeMemory / totalMemory * 100);
         String os = System.getProperty("os.name");
         String javaVersion = System.getProperty("java.version");
 
@@ -60,11 +63,13 @@ public class AdminController {
         model.addAttribute("memPercent", memPercent);
         model.addAttribute("os", os);
         model.addAttribute("javaVersion", javaVersion);
-	}
+    }
 
-	@GetMapping(value = "/lockScreen")
-    public String lockScreen(ModelMap map){
-	    map.getAttribute("admin");
+    @GetMapping("/lockScreen")
+    public String lockScreen(ModelMap map) {
+        Subject subject = SecurityUtils.getSubject();
+        AccountProfile user = (AccountProfile) subject.getPrincipal();
+        map.put("user", user);
         return "/admin/lock";
     }
 }

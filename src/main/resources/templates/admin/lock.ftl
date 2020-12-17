@@ -91,12 +91,11 @@
 <body class="lockscreen">
 <div class="lockscreen-wrapper">
     <div class="lockscreen-time"></div>
-    <div class="lockscreen-name">[[ ${user.loginName} ]] / [[${#strings.defaultString(user.userName, '-')}]]</div>
+    <div class="lockscreen-name"> ${user.username}</div>
 
     <div class="lockscreen-item">
         <div class="lockscreen-image">
-            <img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}"
-                 th:onerror="this.src='img/profile.jpg'" class="img-circle" alt="User Image">
+            <img src="<@resource src=user.avatar/>" class="img-circle" alt="User Image">
         </div>
         <form class="lockscreen-credentials" method="post" action="#" onsubmit="return false;">
             <div class="input-group">
@@ -111,13 +110,13 @@
 
     <div class="help-block text-center" style="margin-top: 50px;">系统锁屏,请输入密码登陆!</div>
     <div class="text-center">
-        <a th:href="@{logout}">退出重新登陆</a>
+        <a href="${base}/logout">退出重新登陆</a>
     </div>
 </div>
 <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 <script src="../static/js/three.min.js" th:src="@{/js/three.min.js}"></script>
-<script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script src="../static/js/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.5.1}"></script>
 </body>
 <script th:inline="javascript">
