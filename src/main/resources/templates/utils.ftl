@@ -7,7 +7,11 @@
 
 <#-- 栏目名称显示 -->
 <#macro showChannel row>
-<span class=" hidden-xs label label-default <#if (row.featured > 0)>channel_featured</#if> <#if (row.weight > 0)>channel_top</#if>">${row.channel.name}</span>
+<span class=" hidden-xs label label-default
+<#if (row.featured > 0)>channel_featured</#if>
+<#if (row.weight > 0)>channel_top</#if>">
+    ${row.channel.name}
+</span>
 </#macro>
 
 <#-- 分页显示 -->
