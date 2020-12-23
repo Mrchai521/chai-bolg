@@ -239,4 +239,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll(pageable);
     }
 
+    @Override
+    public boolean matches(AccountProfile user, String password) {
+        User byUsername = userRepository.findByUsername(user.getUsername());
+        if (StringUtils.equals(byUsername.getPassword(), MD5.md5(password))) {
+            return true;
+        }
+        return false;
+    }
+
 }

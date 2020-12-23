@@ -124,4 +124,13 @@ public interface UserService {
     long count();
 
     Page<User> findAll(Pageable pageable);
+
+    /**
+     * 校验密码正确性
+     *
+     * @param user
+     * @param password
+     * @return
+     */
+    boolean matches(AccountProfile user, String password);
 }

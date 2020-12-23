@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html  xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--360浏览器优先以webkit内核解析-->
     <title>锁定屏幕</title>
-    <link th:href="@{favicon.ico}" rel="shortcut icon"/>
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="<@resource src=user.avatar/>"  rel="shortcut icon"/>
+    <link href="${base}/dist/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <style>
         .lockscreen {
             background: #d2d6de;
@@ -113,14 +113,16 @@
         <a href="${base}/logout">退出重新登陆</a>
     </div>
 </div>
-<script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
-<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-<script src="../static/js/three.min.js" th:src="@{/js/three.min.js}"></script>
-<script src="../static/js/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.5.1}"></script>
+<!-- jQuery -->
+<script src="${base}/dist/js/jquery.min.js"></script>
+<script src="${base}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${base}/dist/js/three.min.js"></script>
+<#--<script src="${base}/dist/vendors/layer/layer.js"></script>-->
+<script type="text/javascript" src="${base}/dist/js/layer.min.js"></script>
+<#--<script src="${base}/dist/js/ry-ui.js"></script>-->
 </body>
-<script th:inline="javascript">
-    var ctx = [[@{/}]];
+<script type="text/javascript">
+    var ctx = "";
         Date.prototype.format = function (fmt) {
             var o = {
                 "M+": this.getMonth() + 1,                 //月份
@@ -162,14 +164,14 @@
     function unlock() {
         var username = $("input[name='username']").val();
         var password = $("input[name='password']").val();
-        if ($.common.isEmpty(password)) {
-            $.modal.msg("请输入密码");
+        if (password=="") {
+            layer.alert('请至少选择一项');
             return;
         }
 
         var index = "";
         var config = {
-            url: ctx + "unlockscreen",
+            url: ctx + "api/unlockscreen",
             type: "post",
             dataType: "json",
             data: {password: password},
@@ -177,10 +179,10 @@
                 index = layer.load(2, {shade: false});
             },
             success: function (result) {
-                if (result.code == web_status.SUCCESS) {
+                if (result.code == 0) {
                     location.href = ctx + 'index';
                 } else {
-                    $.modal.msg(result.msg);
+                    layer.msg(result);
                     $("input[name='password']").val("");
                 }
                 layer.close(index);

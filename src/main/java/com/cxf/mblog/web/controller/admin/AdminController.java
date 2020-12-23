@@ -9,6 +9,8 @@
 */
 package com.cxf.mblog.web.controller.admin;
 
+import com.cxf.mblog.base.lang.Consts;
+import com.cxf.mblog.base.lang.Result;
 import com.cxf.mblog.modules.data.AccountProfile;
 import com.cxf.mblog.modules.entity.User;
 import com.cxf.mblog.modules.service.ChannelService;
@@ -20,8 +22,11 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -69,6 +74,7 @@ public class AdminController {
     public String lockScreen(ModelMap map) {
         Subject subject = SecurityUtils.getSubject();
         AccountProfile user = (AccountProfile) subject.getPrincipal();
+        SecurityUtils.getSubject().getSession(true).setAttribute(Consts.LOCK_SCREEN, true);
         map.put("user", user);
         return "/admin/lock";
     }

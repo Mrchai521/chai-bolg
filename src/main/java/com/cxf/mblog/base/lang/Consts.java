@@ -126,4 +126,9 @@ public interface Consts {
 	String STORAGE_MAX_WIDTH = "storage_max_width";
 
 	String THUMBNAIL_POST_SIZE = "thumbnail_post_size";
+
+	/**
+	 * 锁定屏幕字段
+	 */
+	 String LOCK_SCREEN = "lockscreen";
 }
