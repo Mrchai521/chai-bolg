@@ -55,6 +55,7 @@ public class ShiroConfiguration {
         shiroFilter.setSuccessUrl("/");
         shiroFilter.setUnauthorizedUrl("/error/reject.html");
 
+
         HashMap<String, Filter> filters = new HashMap<>();
         filters.put("authc", new AuthenticatedFilter());
         shiroFilter.setFilters(filters);
@@ -80,6 +81,7 @@ public class ShiroConfiguration {
         hashMap.put("/post/submit", "authc");
         hashMap.put("/post/delete/*", "authc");
         hashMap.put("/post/upload", "authc");
+        hashMap.put("/lockScreen", "authc");
 
         hashMap.put("/admin/channel/list", "authc,perms[channel:list]");
         hashMap.put("/admin/channel/update", "authc,perms[channel:update]");

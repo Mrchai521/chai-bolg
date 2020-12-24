@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 /**
- * @author langhsu
+ * @author cxf
  */
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {

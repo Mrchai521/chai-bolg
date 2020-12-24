@@ -38,6 +38,7 @@
         <script src="${base}/dist/vendors/layer/layer.js"></script>
         <script src="${base}/theme/admin/dist/js/site.js"></script>
         <script src="${base}/theme/admin/dist/js/site.base.js"></script>
+        <script src="${base}/dist/js/timer.js"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">

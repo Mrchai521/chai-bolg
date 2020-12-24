@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--360浏览器优先以webkit内核解析-->
     <title>锁定屏幕</title>
-    <link href="<@resource src=user.avatar/>"  rel="shortcut icon"/>
+    <link href="<@resource src=user.avatar/>" rel="shortcut icon"/>
     <link href="${base}/dist/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="${base}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${base}/dist/vendors/layer/skin/layer.css" rel="stylesheet"/>
     <style>
         .lockscreen {
-            background: #d2d6de;
+            background: url("https://api.dujin.org/bing/1920.php") no-repeat center fixed;;
             height: auto;
         }
 
@@ -91,7 +92,7 @@
 <body class="lockscreen">
 <div class="lockscreen-wrapper">
     <div class="lockscreen-time"></div>
-    <div class="lockscreen-name"> ${user.username}</div>
+    <div class="lockscreen-name"> ${user.username}/${user.name}</div>
 
     <div class="lockscreen-item">
         <div class="lockscreen-image">
@@ -117,43 +118,41 @@
 <script src="${base}/dist/js/jquery.min.js"></script>
 <script src="${base}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/dist/js/three.min.js"></script>
-<#--<script src="${base}/dist/vendors/layer/layer.js"></script>-->
-<script type="text/javascript" src="${base}/dist/js/layer.min.js"></script>
-<#--<script src="${base}/dist/js/ry-ui.js"></script>-->
+<script src="${base}/dist/vendors/layer/layer.js"></script>
 </body>
 <script type="text/javascript">
     var ctx = "";
-        Date.prototype.format = function (fmt) {
-            var o = {
-                "M+": this.getMonth() + 1,                 //月份
-                "d+": this.getDate(),                    //日
-                "h+": this.getHours(),                   //小时
-                "m+": this.getMinutes(),                 //分
-                "s+": this.getSeconds(),                 //秒
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-                "S": this.getMilliseconds()             //毫秒
-            };
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
 
-            if (/(y+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            }
-
-            for (var k in o) {
-                if (new RegExp("(" + k + ")").test(fmt)) {
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-                }
-            }
-            return fmt;
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
         }
 
-        $(function () {
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+
+    $(function () {
+        $('.lockscreen-time').text((new Date()).format('hh:mm:ss'));
+        setInterval(function () {
             $('.lockscreen-time').text((new Date()).format('hh:mm:ss'));
-            setInterval(function () {
-                $('.lockscreen-time').text((new Date()).format('hh:mm:ss'));
-            }, 500);
-            init();
-            animate();
-        });
+        }, 500);
+        init();
+        animate();
+    });
 
     $(document).keydown(function (event) {
         if (event.keyCode == 13) {
@@ -164,8 +163,15 @@
     function unlock() {
         var username = $("input[name='username']").val();
         var password = $("input[name='password']").val();
-        if (password=="") {
-            layer.alert('请至少选择一项');
+        if (password == "") {
+            layer.open({
+                icon: 5,
+                title: '提示',
+                content: '请输入密码！',
+                btn: '我知道了',
+                shadeClose: false,
+                time: 2000,
+            });
             return;
         }
 
@@ -182,7 +188,7 @@
                 if (result.code == 0) {
                     location.href = ctx + 'index';
                 } else {
-                    layer.msg(result);
+                    layer.alert(result.message, {icon: 5});
                     $("input[name='password']").val("");
                 }
                 layer.close(index);
