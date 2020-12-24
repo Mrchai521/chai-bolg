@@ -70,8 +70,8 @@
                                             </#if>
                                         </td>
                                         <td>
-                                            <#if row.createTime??>
-                                                ${row.createTime?string("yyyy-MM-dd HH:mm:ss")}
+                                            <#if row.updateTime??>
+                                                ${row.updateTime?string("yyyy-MM-dd HH:mm:ss")}
                                             <#else >
                                                 /
                                             </#if>

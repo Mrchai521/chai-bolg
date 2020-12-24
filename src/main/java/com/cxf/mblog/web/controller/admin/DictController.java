@@ -35,7 +35,7 @@ import java.util.List;
  */
 @Controller("adminDictController")
 @RequestMapping("/admin/dict")
-public class DictController extends BaseController {
+public class    DictController extends BaseController {
     @Autowired
     private DictService dictService;
     @Autowired

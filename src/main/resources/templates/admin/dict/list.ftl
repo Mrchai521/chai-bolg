@@ -64,14 +64,14 @@
                                         <td>${row.dictType}</td>
                                         <td>
                                             <#if row.createTime??>
-                                                ${row.createTime?string('yyyy-MM-dd')}
+                                                ${row.createTime?string("yyyy-MM-dd HH:mm:ss")}
                                             <#else >
                                                /
                                             </#if>
                                         </td>
                                         <td>
-                                            <#if row.createTime??>
-                                                ${row.createTime?string('yyyy-MM-dd')}
+                                            <#if row.updateTime??>
+                                                ${row.updateTime?string("yyyy-MM-dd HH:mm:ss")}
                                             <#else >
                                                 /
                                             </#if>

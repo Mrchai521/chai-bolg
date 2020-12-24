@@ -74,8 +74,8 @@ public class DictServiceImpl implements DictService {
         Optional<DictType> option = dictTypeRepository.findById(dictType.getId());
         DictType po = option.orElse(new DictType());
         dictType.setCreateTime(po.getCreateTime());
-        dictType.setUpdateTime(Calendar.getInstance().getTime());
         BeanUtils.copyProperties(dictType, po);
+        po.setUpdateTime(Calendar.getInstance().getTime());
         dictTypeRepository.save(po);
     }
 

@@ -52,8 +52,8 @@ public class DictDataServiceImpl implements DictDataService {
         Optional<DictData> optional = dictDataRepository.findById(dictDataVO.getId());
         DictData dictData = optional.orElse(new DictData());
         dictData.setCreateTime(dictData.getCreateTime());
-        dictData.setUpdateTime(Calendar.getInstance().getTime());
         BeanUtils.copyProperties(dictDataVO,dictData);
+        dictData.setUpdateTime(Calendar.getInstance().getTime());
         dictDataRepository.save(dictData);
     }
 
