@@ -20,6 +20,7 @@
         <link href="${base}/theme/admin/dist/css/site.css" rel="stylesheet">
         <link href="${base}/theme/admin/dist/css/site.addons.css" rel="stylesheet">
         <link href="${base}/theme/admin/dist/css/skins/skin-blue.css" rel="stylesheet">
+        <link href="${base}/dist/vendors/layui/css/layui.css" rel="stylesheet">
 
         <script type="text/javascript">
             var _MTONS = _MTONS || {};
@@ -39,14 +40,15 @@
         <script src="${base}/theme/admin/dist/js/site.js"></script>
         <script src="${base}/theme/admin/dist/js/site.base.js"></script>
         <script src="${base}/dist/js/timer.js"></script>
+        <script src="${base}/dist/vendors/layui/treeTable.js"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         <!-- Main Header -->
         <header class="main-header">
             <a href="${base}/index" class="logo">
-                <span class="logo-mini">MBG</span>
-                <span class="logo-lg"><b>M</b>BLOG</span>
+                <span class="logo-mini">CXF</span>
+                <span class="logo-lg"><b>C</b>BLOG</span>
             </a>
             <nav class="navbar navbar-static-top">
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -97,7 +99,6 @@
                     <a class="menuItem noactive" title="个人中心" href="${base}/settings/profile">
                         <div class="pull-left image">
                             <img src="<@resource src=profile.avatar/>" class="img-circle" alt="User Image" width="45px">
-
                         </div>
                     </a>
                     <div class="pull-left info">
