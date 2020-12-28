@@ -6,11 +6,14 @@ import com.cxf.mblog.modules.entity.DictData;
 import com.cxf.mblog.modules.entity.Menu;
 import com.cxf.mblog.modules.service.DictDataService;
 import com.cxf.mblog.modules.service.MenuService;
+import com.cxf.mblog.shiro.ShiroUtils;
+import com.cxf.mblog.web.menu.ZTree;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,5 +61,18 @@ public class MenuController {
     public String selectMenuTree(@PathVariable("menuId") Long menuId, ModelMap mmap) {
         mmap.put("menu", menuService.selectMenuById(menuId));
         return prefix + "/tree";
+    }
+
+    @GetMapping("/treeList")
+    @ResponseBody
+    public List<ZTree> treeList(ModelMap modelMap){
+        AccountProfile accountProfile = ShiroUtils.checkAccount();
+        List<ZTree> list = null;
+
+        if(StringUtils.isEmpty(accountProfile.getId())){
+            list = menuService.findAllList();
+        }
+        list = menuService.findAllListByUserId(accountProfile.getId());
+        return list;
     }
 }

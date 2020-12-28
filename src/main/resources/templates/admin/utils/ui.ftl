@@ -40,6 +40,7 @@
         <script src="${base}/theme/admin/dist/js/site.js"></script>
         <script src="${base}/theme/admin/dist/js/site.base.js"></script>
         <script src="${base}/dist/js/timer.js"></script>
+        <script src="${base}/dist/vendors/layui/layui.js"></script>
         <script src="${base}/dist/vendors/layui/treeTable.js"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">

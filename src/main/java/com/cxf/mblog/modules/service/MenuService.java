@@ -1,6 +1,7 @@
 package com.cxf.mblog.modules.service;
 
 import com.cxf.mblog.modules.data.MenuVO;
+import com.cxf.mblog.web.menu.ZTree;
 
 import java.util.List;
 
@@ -27,4 +28,19 @@ public interface MenuService {
      * @return
      */
     List<MenuVO> findMenuList(MenuVO menuVO, long id);
+
+    /**
+     * 所有的树形结构
+     *
+     * @return
+     */
+    List<ZTree> findAllList();
+
+    /**
+     * 不同的用户获取不同的菜单
+     *
+     * @param userId
+     * @return
+     */
+    List<ZTree> findAllListByUserId(long userId);
 }

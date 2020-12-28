@@ -5,6 +5,7 @@ import com.cxf.mblog.modules.entity.Menu;
 import com.cxf.mblog.modules.repository.MenuRepository;
 import com.cxf.mblog.modules.service.MenuService;
 import com.cxf.mblog.modules.service.UserEventService;
+import com.cxf.mblog.web.menu.ZTree;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,15 @@ public class MenuServiceImpl implements MenuService {
             menuVOList.add(menuVO1);
         }
         return menuVOList;
+    }
+
+    @Override
+    public List<ZTree> findAllList() {
+        return null;
+    }
+
+    @Override
+    public List<ZTree> findAllListByUserId(long userId) {
+        return null;
     }
 }
