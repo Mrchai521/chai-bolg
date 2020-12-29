@@ -1,9 +1,10 @@
 package com.cxf.mblog.web.controller.admin;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.cxf.mblog.modules.data.AccountProfile;
 import com.cxf.mblog.modules.data.MenuVO;
 import com.cxf.mblog.modules.entity.DictData;
-import com.cxf.mblog.modules.entity.Menu;
 import com.cxf.mblog.modules.service.DictDataService;
 import com.cxf.mblog.modules.service.MenuService;
 import com.cxf.mblog.shiro.ShiroUtils;
@@ -27,7 +28,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/menu")
 public class MenuController {
-    private static final String prefix ="admin/menu";
+    private static final String prefix = "admin/menu";
 
     @Autowired
     private DictDataService dataService;
@@ -37,23 +38,28 @@ public class MenuController {
     @RequestMapping("/index")
     public String index(ModelMap modelMap) {
         List<DictData> dictData = dataService.findAllByDictType("sys_show_hide");
+        List<ZTree> list = menuService.findAllList();
+        JSONArray data = JSONArray.parseArray(JSON.toJSONString(list));
         modelMap.put("dict", dictData);
-        return prefix+"/index";
+        modelMap.put("data", data);
+        return prefix + "/index";
     }
 
     @RequestMapping("/add")
     public String add(ModelMap modelMap) {
-        return prefix+"/add";
+        return prefix + "/add";
     }
-    @PostMapping("/list")
+
+    @GetMapping("/list")
     @ResponseBody
-    public List<MenuVO> list(MenuVO menuVO){
+    public List<MenuVO> list() {
         //获取登录用户
         Subject subject = SecurityUtils.getSubject();
         AccountProfile user = (AccountProfile) subject.getPrincipal();
-        List<MenuVO> list = menuService.findMenuList(menuVO,user.getId());
+        List<MenuVO> list = menuService.findMenuList( user.getId());
         return list;
     }
+
     /**
      * 选择菜单树
      */
@@ -65,14 +71,13 @@ public class MenuController {
 
     @GetMapping("/treeList")
     @ResponseBody
-    public List<ZTree> treeList(ModelMap modelMap){
+    public List<ZTree> treeList(ModelMap modelMap) {
         AccountProfile accountProfile = ShiroUtils.checkAccount();
         List<ZTree> list = null;
 
-        if(StringUtils.isEmpty(accountProfile.getId())){
+        if (!StringUtils.isEmpty(accountProfile.getId())) {
             list = menuService.findAllList();
         }
-        list = menuService.findAllListByUserId(accountProfile.getId());
         return list;
     }
 }

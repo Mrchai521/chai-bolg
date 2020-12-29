@@ -27,7 +27,7 @@ public interface MenuService {
      * @param id
      * @return
      */
-    List<MenuVO> findMenuList(MenuVO menuVO, long id);
+    List<MenuVO> findMenuList( long id);
 
     /**
      * 所有的树形结构

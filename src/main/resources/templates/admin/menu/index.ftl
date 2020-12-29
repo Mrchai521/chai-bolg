@@ -69,36 +69,24 @@
             // 直接下载后url: './data/table-tree.json',这个配置可能看不到数据，改为data:[],获取自己的实际链接返回json数组
             var re = treeTable.render({
                 elem: '#tree-table',
-                data: [{"id": 1, "pid": 0, "title": "1-1"}, {"id": 2, "pid": 0, "title": "1-2"}, {
-                    "id": 3,
-                    "pid": 0,
-                    "title": "1-3"
-                }, {"id": 4, "pid": 1, "title": "1-1-1"}, {"id": 5, "pid": 1, "title": "1-1-2"}, {
-                    "id": 6,
-                    "pid": 2,
-                    "title": "1-2-1"
-                }, {"id": 7, "pid": 2, "title": "1-2-3"}, {"id": 8, "pid": 3, "title": "1-3-1"}, {
-                    "id": 9,
-                    "pid": 3,
-                    "title": "1-3-2"
-                }, {"id": 10, "pid": 4, "title": "1-1-1-1"}, {"id": 11, "pid": 4, "title": "1-1-1-2"}],
-                icon_key: 'title',
+                data: getData(),
+                icon_key: 'menuName',
                 is_checkbox: true,
                 checked: {
                     key: 'id',
-                    data: [0, 1, 4, 10, 11, 5, 2, 6, 7, 3, 8, 9],
+                    data: [],
                 },
                 end: function (e) {
                     form.render();
                 },
                 cols: [
                     {
-                        key: 'title',
-                        title: '名称',
+                        key: 'id',
+                        title: '菜单名称',
                         width: '100px',
                         template: function (item) {
                             if (item.level == 0) {
-                                return '<span style="color:red;">' + item.title + '</span>';
+                                return '<span style="color:#888;">' + item.title + '</span>';
                             } else if (item.level == 1) {
                                 return '<span style="color:green;">' + item.title + '</span>';
                             } else if (item.level == 2) {
@@ -107,14 +95,14 @@
                         }
                     },
                     {
-                        key: 'id',
-                        title: 'ID',
+                        key: 'title',
+                        title: '标题',
                         width: '100px',
                         align: 'center',
                     },
                     {
                         key: 'pid',
-                        title: '父ID',
+                        title: '父级节点',
                         width: '100px',
                         align: 'center',
                     },
@@ -135,68 +123,24 @@
                     }
                 ]
             });
-            treeTable.render({
-                elem: '#tree-table1',
-                url: '${base}/dist/vendors/layui//table-tree.json',
-                icon_key: 'title',
-                is_checkbox: true,
-                cols: [
-                    {
-                        key: 'title',
-                        title: '名称',
-                        width: '100px',
-                        template: function (item) {
-                            if (item.level == 0) {
-                                return '<span style="color:red;">' + item.title + '</span>';
-                            } else if (item.level == 1) {
-                                return '<span style="color:green;">' + item.title + '</span>';
-                            } else if (item.level == 2) {
-                                return '<span style="color:#aaa;">' + item.title + '</span>';
-                            }
-                        }
-                    },
-                    {
-                        key: 'id',
-                        title: 'ID',
-                        width: '100px',
-                        align: 'center',
-                    },
-                    {
-                        key: 'pid',
-                        title: '父ID',
-                        width: '100px',
-                        align: 'center',
-                    },
-                ]
-            });
-            treeTable.render({
-                elem: '#tree',
-                url: '${base}/dist/vendors/layui/table-tree.json',
-                icon_key: 'title',
-                is_checkbox: true,
-                icon: {
-                    open: 'layui-icon layui-icon-rate',
-                    close: 'layui-icon layui-icon-rate-solid',
-                    left: 16,
-                },
-                cols: [
-                    {
-                        key: 'title',
-                        title: '名称',
-                    },
-                ]
-            });
-            treeTable.render({
-                elem: '#tree1',
-                url: '${base}/dist/vendors/layui/table-tree.json',
-                icon_key: 'title',
-                cols: [
-                    {
-                        key: 'title',
-                        title: '名称',
-                    },
-                ]
-            });
+
+            /**
+             * 获取菜单结构树
+             * @returns {[]}
+             */
+            function getData() {
+                var data = [];
+                $.ajax({
+                    url: "${base}/admin/menu/treeList",    //后台数据请求地址
+                    type: "get",
+                    async: false,
+                    success: function (resut) {
+                        data = resut;
+                        console.log("data的值为：",data[0]);
+                    }
+                });
+                return data[0];
+            }
             // 监听展开关闭
             treeTable.on('tree(flex)', function (data) {
                 layer.msg(JSON.stringify(data));
@@ -206,7 +150,8 @@
                 if (o(data.elem).parents('#tree-table1').length) {
                     var text = [];
                     o(data.elem).parents('#tree-table1').find('.cbx.layui-form-checked').each(function () {
-                        o(this).parents('[data-pid]').length && text.push(o(this).parents('td').next().find('span').text());
+                        o(this).parents('[data-pid]').length && text.push(o(this).parents('td').next().find('span')
+                            .text());
                     })
                     o(data.elem).parents('#tree-table1').prev().find('input').val(text.join(','));
                 }

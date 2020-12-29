@@ -21,7 +21,7 @@ public class ZTree implements Serializable {
     /**
      * 节点父ID
      */
-    private Long pId;
+    private Long pid;
 
     /**
      * 节点名称

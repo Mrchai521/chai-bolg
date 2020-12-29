@@ -34,13 +34,16 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<MenuVO> findMenuList(MenuVO menuVO, long id) {
+    public List<MenuVO> findMenuList(long id) {
         //判断是否为管理员用户
         List<Menu> menuList = menuRepository.findAll();
         List<MenuVO> menuVOList = new ArrayList<>();
         for (Menu menu : menuList) {
             MenuVO menuVO1 = new MenuVO();
-            BeanUtils.copyProperties(menuVO1, menu);
+            menuVO1.setId(menu.getId());
+            menuVO1.setMenuName(menu.getMenuName());
+            menuVO1.setUrl(menu.getUrl());
+            menuVO1.setOrderNum(menu.getOrderNum());
             menuVOList.add(menuVO1);
         }
         return menuVOList;
@@ -48,7 +51,43 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<ZTree> findAllList() {
-        return null;
+        List<Menu> menuList = menuRepository.findAll();
+        List<ZTree> zTreeList = initMenuTree(menuList);
+        return zTreeList;
+    }
+
+    /**
+     * 对象转菜单树
+     *
+     * @param menuList
+     * @return
+     */
+    private List<ZTree> initMenuTree(List<Menu> menuList) {
+        List<ZTree> zTreeList = new ArrayList<>();
+        for (Menu menu : menuList) {
+            ZTree zTree = new ZTree();
+            zTree.setId(menu.getId());
+            zTree.setPid(menu.getParentId());
+            zTree.setName(transMenuName(menu));
+            zTree.setTitle(menu.getMenuName());
+            zTreeList.add(zTree);
+        }
+        return zTreeList;
+    }
+
+    /**
+     * 转换菜单名称
+     *
+     * @param menu
+     * @return
+     */
+    public String transMenuName(Menu menu) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(menu.getMenuName());
+        if (false) {
+            sb.append("<font color=\"#888\">&nbsp;&nbsp;&nbsp;" + menu.getMenuName() + "</font>");
+        }
+        return sb.toString();
     }
 
     @Override
