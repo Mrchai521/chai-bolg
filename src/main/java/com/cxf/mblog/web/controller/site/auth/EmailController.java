@@ -20,7 +20,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author langhsu on 2015/8/14.
+ * @author xfchai
+ * @ClassName EmailController.java
+ * @Description EmailController邮件控制器
+ * @createTime 2021/09/06 09:38:00
  */
 @RestController
 @RequestMapping("/email")

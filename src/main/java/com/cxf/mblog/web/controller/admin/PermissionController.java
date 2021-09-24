@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @author - langhsu
- * @create - 2018/5/18
+ * @author xfchai
+ * @ClassName PermissionController.java
+ * @Description PermissionController
+ * @createTime 2021/09/06 09:38:00
  */
 @RestController
 @RequestMapping("/admin/permission")

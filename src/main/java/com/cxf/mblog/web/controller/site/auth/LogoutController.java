@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author langhsu
+ * @author xfchai
+ * @ClassName LogoutController.java
+ * @Description LogoutController
+ * @createTime 2021/09/06 09:38:00
  */
 @Controller
 public class LogoutController extends BaseController {
@@ -31,9 +34,12 @@ public class LogoutController extends BaseController {
     @RequestMapping("/logout")
     public String logout(HttpServletResponse response) {
         SecurityUtils.getSubject().logout();
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-        response.setDateHeader("Expires", 0); // Proxies.
+        // HTTP 1.1.
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        // HTTP 1.0.
+        response.setHeader("Pragma", "no-cache");
+        // Proxies.
+        response.setDateHeader("Expires", 0);
         return Views.REDIRECT_INDEX;
     }
 

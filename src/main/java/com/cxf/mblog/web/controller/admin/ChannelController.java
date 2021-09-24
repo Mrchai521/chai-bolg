@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author langhsu
- *
+ * @author xfchai
+ * @ClassName ChannelController.java
+ * @Description ChannelController
+ * @createTime 2021/09/06 09:38:00
  */
 @Controller("adminChannelController")
 @RequestMapping("/admin/channel")

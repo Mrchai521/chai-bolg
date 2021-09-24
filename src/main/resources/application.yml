@@ -1,5 +1,5 @@
 server:
-    port: 8080
+    port: 80
     use-forward-headers: true
     undertow:
         io-threads: 2
@@ -8,7 +8,7 @@ server:
         directBuffers: true
 spring:
     profiles:
-        active: dev
+        active: pro
     devtools:
         enabled: true
     cache:

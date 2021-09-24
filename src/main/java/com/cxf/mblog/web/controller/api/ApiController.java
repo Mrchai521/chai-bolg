@@ -32,9 +32,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 侧边栏数据加载
- *
- * @author langhsu
+ * @author xfchai
+ * @ClassName ApiController.java
+ * @Description 侧边栏数据加载
+ * @createTime 2021/09/06 09:38:00
  */
 @RestController
 @RequestMapping("/api")

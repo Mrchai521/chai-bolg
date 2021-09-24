@@ -20,7 +20,10 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author : landy
+ * @author xfchai
+ * @ClassName ThemeController.java
+ * @Description ThemeController主题
+ * @createTime 2021/09/06 09:38:00
  */
 @Controller
 @RequestMapping("/admin/theme")

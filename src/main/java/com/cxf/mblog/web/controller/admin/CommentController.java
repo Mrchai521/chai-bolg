@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * @author langhsu
- *
+ * @author xfchai
+ * @ClassName CommentController.java
+ * @Description CommentController
+ * @createTime 2021/09/06 09:38:00
  */
 @Controller("adminCommentController")
 @RequestMapping("/admin/comment")

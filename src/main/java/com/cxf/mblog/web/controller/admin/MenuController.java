@@ -15,14 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 /**
  * @author xfchai
  * @ClassName MenuController.java
- * @Description TODO
+ * @Description 菜单controller
  * @createTime 2020/12/24 16:25:00
  */
 @Controller
@@ -56,7 +59,7 @@ public class MenuController {
         //获取登录用户
         Subject subject = SecurityUtils.getSubject();
         AccountProfile user = (AccountProfile) subject.getPrincipal();
-        List<MenuVO> list = menuService.findMenuList( user.getId());
+        List<MenuVO> list = menuService.findMenuList(user.getId());
         return list;
     }
 

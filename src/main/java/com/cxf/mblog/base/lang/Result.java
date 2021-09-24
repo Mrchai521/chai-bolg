@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * @author xfchai
  * @ClassName Result.java
- * @Description TODO
+ * @Description 结果实体
  * @createTime 2020/11/16 18:08:00
  */
 @Data

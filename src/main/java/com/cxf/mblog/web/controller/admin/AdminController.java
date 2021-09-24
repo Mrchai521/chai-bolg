@@ -31,7 +31,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author langhsu
+ * @author xfchai
+ * @ClassName AdminController.java
+ * @Description 管理员controller
+ * @createTime 2021/09/06 09:38:00
  */
 @Controller
 public class AdminController {

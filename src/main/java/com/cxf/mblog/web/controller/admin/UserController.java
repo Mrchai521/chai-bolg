@@ -33,7 +33,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author langhsu
+ * @author xfchai
+ * @ClassName UserController.java
+ * @Description UserController用户控制
+ * @createTime 2021/09/06 09:38:00
  */
 @Controller("adminUserController")
 @RequestMapping("/admin/user")

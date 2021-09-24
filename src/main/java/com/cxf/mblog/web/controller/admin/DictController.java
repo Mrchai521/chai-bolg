@@ -1,17 +1,12 @@
 package com.cxf.mblog.web.controller.admin;
 
-import cn.hutool.core.lang.Dict;
 import com.cxf.mblog.base.lang.Result;
-import com.cxf.mblog.base.utils.SpringUtils;
-import com.cxf.mblog.modules.data.CommentVO;
 import com.cxf.mblog.modules.data.DictTypeVO;
-import com.cxf.mblog.modules.entity.Channel;
 import com.cxf.mblog.modules.entity.DictType;
 import com.cxf.mblog.modules.service.DictDataService;
 import com.cxf.mblog.modules.service.DictService;
 import com.cxf.mblog.web.controller.BaseController;
 import io.undertow.util.StatusCodes;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,12 +25,12 @@ import java.util.List;
 /**
  * @author xfchai
  * @ClassName DictController.java
- * @Description TODO
+ * @Description 管理员字典
  * @createTime 2020/11/19 17:22:00
  */
 @Controller("adminDictController")
 @RequestMapping("/admin/dict")
-public class    DictController extends BaseController {
+public class DictController extends BaseController {
     @Autowired
     private DictService dictService;
     @Autowired

@@ -30,9 +30,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
- * 第三方登录回调
- *
- * @author langhsu
+ * @author xfchai
+ * @ClassName CallbackController.java
+ * @Description 第三方登录回调
+ * @createTime 2021/09/06 09:38:00
  */
 @Slf4j
 @Controller
